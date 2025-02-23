@@ -1,5 +1,4 @@
-import { createApp } from './src/utils/config.js';
-import { connectToDatabase } from './src/utils/db.js';
+import { connectToDatabase, createApp } from './src/utils/index.js'
 import userRoutes from './src/routes/user.js'
 import http from 'http'
 import { Server } from 'socket.io'
