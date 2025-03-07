@@ -6,7 +6,6 @@ import path from 'path';
 import swaggerJsDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import { setupSocket } from './src/controllers/index.js';
-import express from 'express'
 
 const app = createApp()
 

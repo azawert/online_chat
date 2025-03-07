@@ -63,7 +63,14 @@ router.post('/verification', UserController.verificationCodeCheck)
  * /api/user/update-name:
  *   patch:
  *     summary: Update user name
- *     tags: [User  ]
+ *     tags: [User]
+ *     parameters:
+ *       - in: header
+ *         name: Authorization
+ *         required: true
+ *         schema:
+ *           type: string
+ *           example: Bearer your_token_here
  *     requestBody:
  *       required: true
  *       content:
