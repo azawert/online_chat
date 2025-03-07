@@ -1,0 +1,47 @@
+openapi: 3.0.0
+info:
+  title: WebSocket API
+  version: 1.0.0
+  description: WebSocket API for real-time messaging
+
+paths: {}
+
+components:
+  schemas:
+    SendMessage:
+      type: object
+      properties:
+        token:
+          type: string
+          description: JWT токен пользователя
+        text:
+          type: string
+          description: Текст сообщения
+    ReceiveMessage:
+      type: object
+      properties:
+        sender:
+          type: string
+          description: ID отправителя
+        text:
+          type: string
+          description: Текст сообщения
+        email:
+          type: string
+          description: Email отправителя
+        createdAt:
+          type: string
+          format: date-time
+          description: Время отправки
+
+websocket:
+  /:
+    description: WebSocket соединение
+    subscribe:
+      summary: Получение сообщений
+      message:
+        $ref: '#/components/schemas/ReceiveMessage'
+    send:
+      summary: Отправка сообщений
+      message:
+        $ref: '#/components/schemas/SendMessage'
