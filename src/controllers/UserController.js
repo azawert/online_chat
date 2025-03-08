@@ -81,6 +81,26 @@ class UserController {
 			res.status(500).json({ message: 'Error retrieving messages' });
 		}
 	}
+
+	async getMe(req, res) {
+		const token = getTokenFromHeader(req)
+
+		if (!token) {
+			return res.status(401).json({ message: 'unauthorized' })
+		}
+		try {
+			const decoded = jwt.verify(token, process.env.JWT_SECRET)
+
+			const email = decoded.email
+
+			const user = await User.findOne({ email })
+
+			return res.status(200).json({ ...user })
+		} catch (e) {
+			console.error('error while getting info about user', e)
+			res.status(500).json({ message: 'Error while getting info about user' })
+		}
+	}
 }
 
 export const controller = new UserController()
