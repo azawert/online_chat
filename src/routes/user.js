@@ -127,4 +127,45 @@ router.patch('/update-name', UserController.updateUserName)
  */
 router.get('/messages', UserController.getMessages)
 
+/**
+ * @swagger
+ * /api/user/me:
+ *   get:
+ *     summary: Retrieve information about the authenticated user
+ *     tags: [User ]
+ *     parameters:
+ *       - in: header
+ *         name: Authorization
+ *         required: true
+ *         schema:
+ *           type: string
+ *           example: Bearer your_token_here
+ *     responses:
+ *       200:
+ *         description: User information retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 _id:
+ *                   type: string
+ *                   example: 60c72b2f9b1e8a001c8e4e1f
+ *                 email:
+ *                   type: string
+ *                   example: user@example.com
+ *                 name:
+ *                   type: string
+ *                   example: John Doe
+ *                 createdAt:
+ *                   type: string
+ *                   format: date-time
+ *                   example: 2023-01-01T12:00:00Z
+ *       401:
+ *         description: Unauthorized - No token provided or invalid token
+ *       500:
+ *         description: Error retrieving user information
+ */
+router.get('/me', UserController.getMe)
+
 export default router
