@@ -5,7 +5,7 @@ const router = Router()
 
 /**
  * @swagger
- * /api/user/send-code:
+ * /api/user/:
  *   post:
  *     summary: Send verification code to email
  *     tags: [User ]
@@ -31,7 +31,7 @@ router.post('/', UserController.sendCode)
 
 /**
  * @swagger
- * /api/user/verification-code-check:
+ * /api/user/verification:
  *   post:
  *     summary: Verify the code sent to email
  *     tags: [User ]
