@@ -35,7 +35,7 @@ const swaggerOptions = {
 				{ url: 'http://localhost:4001', description: 'Local Server' },
 			]
 			: [
-				{ url: 'https://your-koyeb-app.koyeb.app', description: 'Production Server' },
+				{ url: process.env.APP_URL, description: 'Production Server' },
 			],
 		components: {
 			securitySchemes: {
