@@ -20,23 +20,23 @@ const __dirname = path.resolve();
 
 setupSocket(io)
 
+const IS_DEV = process.env.NODE_ENV !== 'production';
+
 const swaggerOptions = {
 	swaggerDefinition: {
 		openapi: '3.0.0',
 		info: {
-			title: 'Online chat api',
+			title: 'Online chat API',
 			version: '1.0.0',
 			description: 'API documentation',
 		},
-		servers: [
-			{
-				url: `http://localhost:4001`,
-			},
-			{
-				url: `ws://localhost:4001`,
-				description: 'WebSocket server',
-			},
-		],
+		servers: IS_DEV
+			? [
+				{ url: 'http://localhost:4001', description: 'Local Server' },
+			]
+			: [
+				{ url: 'https://your-koyeb-app.koyeb.app', description: 'Production Server' },
+			],
 		components: {
 			securitySchemes: {
 				bearerAuth: {
@@ -47,7 +47,7 @@ const swaggerOptions = {
 			},
 		},
 	},
-	apis: ["./src/routes/*.js", "./src/docs/websocket.yaml"],
+	apis: ['./src/routes/*.js', './src/docs/websocket.yaml'],
 };
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
