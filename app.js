@@ -2,6 +2,7 @@ import { connectToDatabase, createApp } from './src/utils/index.js'
 import userRoutes from './src/routes/user.js'
 import http from 'http'
 import { Server } from 'socket.io'
+import cors from 'cors';
 import path from 'path';
 import swaggerJsDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
@@ -14,7 +15,11 @@ const port = process.env.PORT || 3001;
 connectToDatabase()
 
 const server = http.createServer(app)
-const io = new Server(server)
+const io = new Server(server, {
+	cors: {
+		origin: '*'
+	}
+})
 
 const __dirname = path.resolve();
 
@@ -58,6 +63,8 @@ app.get('/', (_, res) => {
 	res.sendFile(path.join(__dirname, 'public', '/index.html'))
 })
 
+app.use(cors({
 
+}))
 
 server.listen(port, () => console.log(`Server is active on port ${port}`));
